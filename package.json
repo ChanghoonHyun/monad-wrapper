@@ -1,12 +1,12 @@
 {
   "name": "monad-wrapper",
-  "version": "0.0.1",
-  "private": true,
-  "description": "Wrap by monad",
-  "keywords": [],
-  "author": "",
-  "license": "",
+  "version": "1.0.0",
+  "description": "wrap by monad",
   "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "monet": "^0.8.10",
@@ -18,5 +18,19 @@
   },
   "scripts": {
     "test": "node_modules/mocha/bin/mocha $(find ./test/ -name '**/*.js') --recursive --timeout 5000 --exit"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChanghoonHyun/monad-wrapper.git"
+  },
+  "keywords": [
+    "monad",
+    "node"
+  ],
+  "author": "chhyun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChanghoonHyun/monad-wrapper/issues"
+  },
+  "homepage": "https://github.com/ChanghoonHyun/monad-wrapper#readme"
 }
