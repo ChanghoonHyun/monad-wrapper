@@ -1,6 +1,6 @@
 const should = require('should');
 const R = require('ramda');
-const monad = require('../lib/monad');
+const monad = require('../index').monad;
 
 describe('lib/monad', () => {
 

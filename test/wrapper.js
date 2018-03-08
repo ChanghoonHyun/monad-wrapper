@@ -1,44 +1,44 @@
 const should = require('should');
-const W = require('../lib/wrapper');
+// const axios = require('../index').axios;
 
-describe('lib/wrapper', () => {
+// describe('lib/wrapper', () => {
 
-    describe('config', () => {
+//     describe('config', () => {
         
-        it('Right', async () => {
-            const result = await W.axios({
-                method: 'get',
-                url: 'http://google.com'
-            });
-            should.exist(result);
-            should.equal(result.isRight(), true);
-        })
+//         it('Right', async () => {
+//             const result = await axios({
+//                 method: 'get',
+//                 url: 'http://google.com'
+//             });
+//             should.exist(result);
+//             should.equal(result.isRight(), true);
+//         })
 
-        it('Left', async () => {
-            const result = await W.axios({
-                method: 'delete',
-                url: 'http://google.com'
-            });
-            should.exist(result);
-            should.equal(result.isRight(), false);
-        })
+//         it('Left', async () => {
+//             const result = await axios({
+//                 method: 'delete',
+//                 url: 'http://google.com'
+//             });
+//             should.exist(result);
+//             should.equal(result.isRight(), false);
+//         })
 
-    })
+//     })
 
-    describe('get', () => {
+//     describe('get', () => {
         
-        it('Right', async () => {
-            const result = await W.axios.get('http://google.com');
-            should.exist(result);
-            should.equal(result.isRight(), true);
-        })
+//         it('Right', async () => {
+//             const result = await axios.get('http://google.com');
+//             should.exist(result);
+//             should.equal(result.isRight(), true);
+//         })
 
-        it('Left', async () => {
-            const result = await W.axios.get('http://111');
-            should.exist(result);
-            should.equal(result.isRight(), false);
-        })
+//         it('Left', async () => {
+//             const result = await axios.get('http://111');
+//             should.exist(result);
+//             should.equal(result.isRight(), false);
+//         })
 
-    })
+//     })
 
-});
+// });
