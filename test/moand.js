@@ -12,9 +12,18 @@ describe('lib/monad', () => {
             
             const result = M.eitherR({ test: true });
             should.exist(result);
-            should.equal(result.isRight(), true);
-            should.equal(result.isRightValue, true);
+            should.equal(result.isRight, true);
             should.equal(result.value.test, true);
+        });
+
+        it('wrap string', async () => {
+            const log = v => should.exist(v);
+            const M = monad(null, log);
+            
+            const result = M.eitherR('test');
+            should.exist(result);
+            should.equal(result.isRight, true);
+            should.equal(result.value, 'test');
         });
 
     })
@@ -26,8 +35,7 @@ describe('lib/monad', () => {
             
             const result = M.eitherL({ test: true });
             should.exist(result);
-            should.equal(result.isLeft(), true);
-            should.equal(result.isRightValue, false);
+            should.equal(result.isRight, false);
             should.equal(result.value.test, true);
         
         });
@@ -37,10 +45,8 @@ describe('lib/monad', () => {
             
             const result = M.eitherL('test');
             should.exist(result);
-            should.equal(result.isLeft(), true);
-            should.equal(result.isRightValue, false);
-            should.equal(result.value, 'test');
-        
+            should.equal(result.isRight, false);
+            should.equal(result.value, 'test');        
         });
 
         it('wrap Error', async () => {
@@ -48,10 +54,8 @@ describe('lib/monad', () => {
             
             const result = M.eitherL(new Error('test'));
             should.exist(result);
-            should.equal(result.isLeft(), true);
-            should.equal(result.isRightValue, false);
-            should.equal(result.value, 'test');
-        
+            should.equal(result.isRight, false);
+            should.equal(result.value, 'test');    
         });
 
     })
@@ -83,7 +87,7 @@ describe('lib/monad', () => {
         it('Right', async () => {
             const M = monad();
             const r = M.eitherR({ test: true });
-            const result = M.ifRight(r, R.identity);
+            const result = M.ifRight(R.identity, r);
             
             should.exist(result);
             should.equal(result.test, true);
@@ -92,7 +96,7 @@ describe('lib/monad', () => {
         it('Left', async () => {
             const M = monad();
             const r = M.eitherL(new Error('test'));
-            const result = M.ifLeft(r, R.identity);
+            const result = M.ifLeft(R.identity, r);
             
             should.exist(result);
             should.equal(result, 'test');

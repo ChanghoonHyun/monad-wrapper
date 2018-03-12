@@ -9,10 +9,10 @@ var findSuccessCode = function findSuccessCode(e) {
 
 module.exports = function (either) {
     var findStatusCode = function findStatusCode(e) {
-        return e.isRight() ? findSuccessCode(e) : findErrorCode(e);
+        return e.isRight ? findSuccessCode(e) : findErrorCode(e);
     };
     var getBody = function getBody(e) {
-        return e.isRight() ? e.value : { message: e.value.message || e.value };
+        return e.isRight ? e.value : { message: e.value.message || e.value };
     };
 
     return {
