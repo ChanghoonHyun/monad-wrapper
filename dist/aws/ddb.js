@@ -77,6 +77,7 @@ var getInstance = function getInstance(aws, config) {
 };
 
 module.exports = {
+    getInstance: getInstance,
     batchWriteItem: batchWriteItem,
     put: put,
     get: get,
