@@ -14,49 +14,65 @@ var M = (0, _monad2.default)();
 
 var get = _ramda2.default.curry(function (db, params) {
     return new Promise(function (rs) {
-        db.get(params, function (err, data) {
-            return err ? rs(M.eitherL(err)) : rs(M.eitherR(data));
-        });
+        try {
+            db.get(params, function (err, data) {
+                return err ? rs(M.eitherL(err)) : rs(M.eitherR(data));
+            });
+        } catch (e) {
+            rs(M.eitherL(e));
+        }
     });
 });
 
 var put = _ramda2.default.curry(function (db, params) {
     return new Promise(function (rs) {
-        db.put(params, function (err, data) {
-            return err ? rs(M.eitherL(err)) : rs(M.eitherR(data));
-        });
+        try {
+            db.put(params, function (err, data) {
+                return err ? rs(M.eitherL(err)) : rs(M.eitherR(data));
+            });
+        } catch (e) {
+            rs(M.eitherL(e));
+        }
     });
 });
 
 var scan = _ramda2.default.curry(function (db, params) {
     return new Promise(function (rs) {
-        db.scan(params, function (err, data) {
-            return err ? rs(M.eitherL(err)) : rs(M.eitherR(data));
-        });
+        try {
+            db.scan(params, function (err, data) {
+                return err ? rs(M.eitherL(err)) : rs(M.eitherR(data));
+            });
+        } catch (e) {
+            rs(M.eitherL(e));
+        }
     });
 });
 
 var batchWriteItem = _ramda2.default.curry(function (db, params) {
     return new Promise(function (rs) {
-        db.batchWriteItem(params, function (err, data) {
-            return err ? rs(M.eitherL(err)) : rs(M.eitherR(data));
-        });
+        try {
+            db.batchWriteItem(params, function (err, data) {
+                return err ? rs(M.eitherL(err)) : rs(M.eitherR(data));
+            });
+        } catch (e) {
+            rs(M.eitherL(e));
+        }
     });
 });
 
-var getInstance = function getInstance(aws) {
+var getInstance = function getInstance(aws, config) {
+    if (config) {
+        aws.config.update(config);
+    }
+
     var docClient = new aws.DynamoDB.DocumentClient();
     var ddb = new aws.DynamoDB();
 
-    var batchWriteItem = batchWriteItem(ddb);
-    var put = put(docClient);
-    var get = get(docClient);
-    var scan = scan(docClient);
     return {
-        batchWriteItem: batchWriteItem,
-        put: put,
-        get: get,
-        scan: scan
+        batchWriteItem: batchWriteItem(ddb),
+        put: put(docClient),
+        get: get(docClient),
+        scan: scan(docClient)
     };
 };
 

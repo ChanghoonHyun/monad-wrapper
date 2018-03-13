@@ -31,30 +31,44 @@ var acl = {
 
 var upload = _ramda2.default.curry(function (s3, params) {
     return new Promise(function (rs) {
-        s3.upload(params, function (e, r) {
-            return e ? rs(M.eitherL(e)) : rs(M.eitherR(r));
-        });
+        try {
+            s3.upload(params, function (e, r) {
+                return e ? rs(M.eitherL(e)) : rs(M.eitherR(r));
+            });
+        } catch (e) {
+            rs(M.eitherL(e));
+        }
     });
 });
 
 var getObject = _ramda2.default.curry(function (s3, params) {
     return new Promise(function (rs) {
-        s3.getObject(params, function (e, r) {
-            return e ? rs(M.eitherL(e)) : rs(M.eitherR(r));
-        });
+        try {
+            s3.getObject(params, function (e, r) {
+                return e ? rs(M.eitherL(e)) : rs(M.eitherR(r));
+            });
+        } catch (e) {
+            rs(M.eitherL(e));
+        }
     });
 });
 
 var deleteObjects = _ramda2.default.curry(function (s3, params) {
     return new Promise(function (rs) {
-        s3.deleteObjects(params, function (e, r) {
-            return e ? rs(M.eitherL(e)) : rs(M.eitherR(r));
-        });
+        try {
+            s3.deleteObjects(params, function (e, r) {
+                return e ? rs(M.eitherL(e)) : rs(M.eitherR(r));
+            });
+        } catch (e) {
+            rs(M.eitherL(e));
+        }
     });
 });
 
 var getInstance = function getInstance(aws, config) {
-    aws.config.update(config);
+    if (config) {
+        aws.config.update(config);
+    }
     var s3 = new aws.S3();
 
     return {
