@@ -56,14 +56,11 @@ var deleteObjects = _ramda2.default.curry(function (s3, params) {
 var getInstance = function getInstance(aws, config) {
     aws.config.update(config);
     var s3 = new aws.S3();
-    var upload = upload(s3);
-    var getObject = getObject(s3);
-    var deleteObjects = deleteObjects(s3);
 
     return {
-        upload: upload,
-        getObject: getObject,
-        deleteObjects: deleteObjects
+        upload: upload(s3),
+        getObject: getObject(s3),
+        deleteObjects: deleteObjects(s3)
     };
 };
 
