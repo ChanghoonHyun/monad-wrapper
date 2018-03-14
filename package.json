@@ -1,6 +1,6 @@
 {
   "name": "monad-wrapper",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "wrap by monad",
   "main": "index.js",
   "directories": {
@@ -27,7 +27,7 @@
   },
   "scripts": {
     "build": "rm -rf ./dist && ./node_modules/babel-cli/bin/babel.js lib --out-dir dist",
-    "test": "npm run babel && node_modules/mocha/bin/mocha $(find ./test/ -name '**/*.js') --recursive --timeout 5000 --exit"
+    "test": "npm run build && node_modules/mocha/bin/mocha $(find ./test/ -name '**/*.js') --recursive --timeout 5000 --exit"
   },
   "repository": {
     "type": "git",

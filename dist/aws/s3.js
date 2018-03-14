@@ -53,6 +53,16 @@ var getObject = _ramda2.default.curry(function (s3, params) {
     });
 });
 
+var getObjectReadStream = _ramda2.default.curry(function (s3, params) {
+    return new Promise(function (rs) {
+        try {
+            rs(s3.getObject(params).createReadStream());
+        } catch (e) {
+            rs(M.eitherL(e));
+        }
+    });
+});
+
 var deleteObjects = _ramda2.default.curry(function (s3, params) {
     return new Promise(function (rs) {
         try {
@@ -74,6 +84,7 @@ var getInstance = function getInstance(aws, config) {
     return {
         upload: upload(s3),
         getObject: getObject(s3),
+        getObjectReadStream: getObjectReadStream(s3),
         deleteObjects: deleteObjects(s3)
     };
 };
@@ -83,5 +94,6 @@ module.exports = {
     getInstance: getInstance,
     upload: upload,
     getObject: getObject,
+    getObjectReadStream: getObjectReadStream,
     deleteObjects: deleteObjects
 };
