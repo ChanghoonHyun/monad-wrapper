@@ -1,6 +1,6 @@
 {
   "name": "monad-wrapper",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "wrap by monad",
   "main": "index.js",
   "directories": {
