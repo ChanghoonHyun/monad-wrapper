@@ -24,7 +24,7 @@ var publish = _ramda2.default.curry(function (sns, params) {
     });
 });
 
-var getInstance = function getInstance(aws, option) {
+var getInstance = function getInstance(AWS, option) {
     var sns = new AWS.SNS(option);
     return {
         publish: publish(sns)

@@ -36,7 +36,7 @@ var deleteMessage = _ramda2.default.curry(function (sqs, params) {
     });
 });
 
-var getInstance = function getInstance(aws, option) {
+var getInstance = function getInstance(AWS, option) {
     var sqs = new AWS.SQS(option);
     return {
         receiveMessage: receiveMessage(sqs),
